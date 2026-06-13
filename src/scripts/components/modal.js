@@ -1,29 +1,31 @@
-const handleEscUp = (evt) => {
-  if (evt.key === "Escape") {
-    const activePopup = document.querySelector(".popup_is-opened");
-    closeModalWindow(activePopup);
+let openedPopup = null;
+
+const handleEscClose = (evt) => {
+  if (evt.key === "Escape" && openedPopup) {
+    closeModalWindow(openedPopup);
   }
 };
 
-export const openModalWindow = (modalWindow) => {
-  modalWindow.classList.add("popup_is-opened");
-  document.addEventListener("keyup", handleEscUp);
+export const openModalWindow = (popup) => {
+  popup.classList.add("popup_is-opened");
+  openedPopup = popup;
+  document.addEventListener("keydown", handleEscClose);
 };
 
-export const closeModalWindow = (modalWindow) => {
-  modalWindow.classList.remove("popup_is-opened");
-  document.removeEventListener("keyup", handleEscUp);
+export const closeModalWindow = (popup) => {
+  popup.classList.remove("popup_is-opened");
+  openedPopup = null;
+  document.removeEventListener("keydown", handleEscClose);
 };
 
-export const setCloseModalWindowEventListeners = (modalWindow) => {
-  const closeButtonElement = modalWindow.querySelector(".popup__close")
-  closeButtonElement.addEventListener("click", () => {
-    closeModalWindow(modalWindow);
-  });
+export const setModalCloseHandlers = (popup) => {
+  const closeButton = popup.querySelector(".popup__close");
 
-  modalWindow.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup")) {
-      closeModalWindow(modalWindow);
+  closeButton.addEventListener("click", () => closeModalWindow(popup));
+
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target === popup) {
+      closeModalWindow(popup);
     }
   });
-}
+};

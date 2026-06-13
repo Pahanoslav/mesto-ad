@@ -1,0 +1,21 @@
+@media (max-width: 620px) {
+  .profile {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    padding: 28px 0;
+  }
+
+  .profile__title {
+    font-size: 27px;
+  }
+
+  .profile__add-button {
+    width: 100%;
+  }
+
+  .places__list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap");
+
+@import "./blocks/header.css";
+@import "./blocks/profile.css";
+@import "./blocks/cards.css";
+@import "./blocks/popup.css";
+@import "./blocks/media.css";
+
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey: #545050;
+  --color-grey-light: #c0c0c0;
+  --color-like: #ff4053;
+  --font-main: "Inter", Arial, Helvetica, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-main);
+  font-size: 18px;
+  line-height: 1.22;
+  font-weight: 400;
+  color: var(--color-white);
+  background-color: var(--color-black);
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+.page__content {
+  max-width: 882px;
+  margin: 0 auto;
+  padding: 0 19px;
+}

@@ -1,0 +1,10 @@
+.header {
+  border-bottom: 1px solid var(--color-grey);
+  padding: 28px 0;
+}
+
+.header__logo {
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1;
+}
