@@ -35,9 +35,12 @@ export const createCard = (
     );
   }
 
-  likeButton.addEventListener("click", () =>
-    handleLikeClick(cardElement, cardData)
-  );
+  likeButton.addEventListener("click", () => {
+    const isLiked = likeButton.classList.contains(
+      "card__like-button_is-active"
+    );
+    handleLikeClick(cardElement, cardData, isLiked);
+  });
 
   cardImage.addEventListener("click", () =>
     handleImageClick(cardData.name, cardData.link)

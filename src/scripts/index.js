@@ -21,6 +21,7 @@ const validationConfig = {
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
 };
 
 // Профиль
@@ -105,11 +106,7 @@ const handleImageClick = (name, link) => {
   openModalWindow(imagePopup);
 };
 
-const handleLikeClick = (cardElement, cardData) => {
-  const isLiked = cardElement
-    .querySelector(".card__like-button")
-    .classList.contains("card__like-button_is-active");
-
+const handleLikeClick = (cardElement, cardData, isLiked) => {
   changeLikeCardStatus(cardData._id, isLiked)
     .then((updatedCard) => {
       updateLikeButton(cardElement, !isLiked);
@@ -214,7 +211,6 @@ newAvatarForm.addEventListener("submit", (evt) => {
   })
     .then((userData) => {
       profileImage.style.backgroundImage = `url('${userData.avatar}')`;
-      newAvatarForm.reset();
       closeModalWindow(avatarPopup);
     })
     .catch((err) => console.log(err))
@@ -243,7 +239,6 @@ newPlaceForm.addEventListener("submit", (evt) => {
   })
     .then((cardData) => {
       renderCard(cardData, "prepend");
-      newPlaceForm.reset();
       closeModalWindow(newPlacePopup);
     })
     .catch((err) => console.log(err))

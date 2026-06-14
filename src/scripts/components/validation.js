@@ -4,6 +4,7 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
   );
 
   inputElement.classList.add(config.inputErrorClass);
+  errorElement.classList.add(config.errorClass);
   errorElement.textContent = errorMessage;
 };
 
@@ -13,6 +14,7 @@ const hideInputError = (formElement, inputElement, config) => {
   );
 
   inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.errorClass);
   errorElement.textContent = "";
 };
 

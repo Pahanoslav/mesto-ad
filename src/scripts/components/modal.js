@@ -1,20 +1,20 @@
-let openedPopup = null;
-
 const handleEscClose = (evt) => {
-  if (evt.key === "Escape" && openedPopup) {
-    closeModalWindow(openedPopup);
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_is-opened");
+
+    if (openedPopup) {
+      closeModalWindow(openedPopup);
+    }
   }
 };
 
 export const openModalWindow = (popup) => {
   popup.classList.add("popup_is-opened");
-  openedPopup = popup;
   document.addEventListener("keydown", handleEscClose);
 };
 
 export const closeModalWindow = (popup) => {
   popup.classList.remove("popup_is-opened");
-  openedPopup = null;
   document.removeEventListener("keydown", handleEscClose);
 };
 
