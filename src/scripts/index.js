@@ -136,7 +136,7 @@ const handleInfoClick = (cardId) => {
       cardInfoUsersList.replaceChildren();
 
       cardInfoList.append(
-        createInfoString("Описание:", cardData.name),
+        createInfoString("Название:", cardData.name),
         createInfoString(
           "Дата создания:",
           formatDate(new Date(cardData.createdAt))
