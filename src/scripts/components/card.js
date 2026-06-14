@@ -60,3 +60,7 @@ export const updateLikeCount = (cardElement, likesCount) => {
   const likeCount = cardElement.querySelector(".card__like-count");
   likeCount.textContent = likesCount;
 };
+
+export const removeCard = (cardElement) => {
+  cardElement.remove();
+};

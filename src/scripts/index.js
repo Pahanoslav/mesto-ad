@@ -12,7 +12,7 @@ import {
   closeModalWindow,
   setModalCloseHandlers,
 } from "./components/modal.js";
-import { createCard, updateLikeButton, updateLikeCount } from "./components/card.js";
+import { createCard, updateLikeButton, updateLikeCount, removeCard } from "./components/card.js";
 import { enableValidation, clearValidation } from "./components/validation.js";
 
 const validationConfig = {
@@ -261,7 +261,7 @@ removeCardForm.addEventListener("submit", (evt) => {
 
   deleteCard(cardToDelete.cardId)
     .then(() => {
-      cardToDelete.cardElement.remove();
+      removeCard(cardToDelete.cardElement);
       cardToDelete = null;
       closeModalWindow(removeCardPopup);
     })
