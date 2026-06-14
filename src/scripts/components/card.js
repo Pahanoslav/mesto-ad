@@ -5,16 +5,17 @@ export const createCard = (
   userId,
   { handleLikeClick, handleDeleteClick, handleImageClick, handleInfoClick }
 ) => {
-  const cardElement = cardTemplate
-    .querySelector(".card")
-    .cloneNode(true);
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
-  const likeIcon = cardElement.querySelector(".card__like-icon");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  const infoButton = cardElement.querySelector(".card__info-button");
+  const deleteButton = cardElement.querySelector(
+    ".card__control-button_type_delete"
+  );
+  const infoButton = cardElement.querySelector(
+    ".card__control-button_type_info"
+  );
 
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
@@ -23,7 +24,7 @@ export const createCard = (
   updateLikeCount(cardElement, cardData.likes.length);
 
   if (cardData.likes.some((user) => user._id === userId)) {
-    likeIcon.classList.add("card__like-icon_active");
+    likeButton.classList.add("card__like-button_is-active");
   }
 
   if (cardData.owner._id !== userId) {
@@ -48,8 +49,8 @@ export const createCard = (
 };
 
 export const updateLikeButton = (cardElement, isLiked) => {
-  const likeIcon = cardElement.querySelector(".card__like-icon");
-  likeIcon.classList.toggle("card__like-icon_active", isLiked);
+  const likeButton = cardElement.querySelector(".card__like-button");
+  likeButton.classList.toggle("card__like-button_is-active", isLiked);
 };
 
 export const updateLikeCount = (cardElement, likesCount) => {

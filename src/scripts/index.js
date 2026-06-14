@@ -29,9 +29,6 @@ const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileAddButton = document.querySelector(".profile__add-button");
-const profileAvatarEditButton = document.querySelector(
-  ".profile__avatar-edit-button"
-);
 
 // Список карточек
 const placesList = document.querySelector(".places__list");
@@ -45,7 +42,7 @@ const newPlacePopup = document.querySelector(".popup_type_new-card");
 const newPlaceForm = newPlacePopup.querySelector(".popup__form");
 
 // Попап обновления аватара
-const avatarPopup = document.querySelector(".popup_type_avatar");
+const avatarPopup = document.querySelector(".popup_type_edit-avatar");
 const newAvatarForm = avatarPopup.querySelector(".popup__form");
 
 // Попап подтверждения удаления карточки
@@ -59,8 +56,8 @@ const imagePopupCaption = imagePopup.querySelector(".popup__caption");
 
 // Попап информации о карточке
 const cardInfoPopup = document.querySelector(".popup_type_info");
-const cardInfoList = cardInfoPopup.querySelector(".popup__info-list");
-const cardInfoUsersList = cardInfoPopup.querySelector(".popup__users-list");
+const cardInfoList = cardInfoPopup.querySelector(".popup__info");
+const cardInfoUsersList = cardInfoPopup.querySelector(".popup__list");
 
 // Шаблоны для попапа информации о карточке
 const infoDefinitionTemplate = document.querySelector(
@@ -86,17 +83,17 @@ const createInfoString = (term, value) => {
     .cloneNode(true);
 
   infoItem.querySelector(".popup__info-term").textContent = term;
-  infoItem.querySelector(".popup__info-value").textContent = value;
+  infoItem.querySelector(".popup__info-description").textContent = value;
 
   return infoItem;
 };
 
 const createUserPreview = (user) => {
   const userItem = infoUserPreviewTemplate
-    .querySelector(".popup__user-item")
+    .querySelector(".popup__list-item")
     .cloneNode(true);
 
-  userItem.querySelector(".popup__user-name").textContent = user.name;
+  userItem.textContent = user.name;
 
   return userItem;
 };
@@ -110,8 +107,8 @@ const handleImageClick = (name, link) => {
 
 const handleLikeClick = (cardElement, cardData) => {
   const isLiked = cardElement
-    .querySelector(".card__like-icon")
-    .classList.contains("card__like-icon_active");
+    .querySelector(".card__like-button")
+    .classList.contains("card__like-button_is-active");
 
   changeLikeCardStatus(cardData._id, isLiked)
     .then((updatedCard) => {
@@ -199,7 +196,7 @@ editProfileForm.addEventListener("submit", (evt) => {
 });
 
 // Обновление аватара
-profileAvatarEditButton.addEventListener("click", () => {
+profileImage.addEventListener("click", () => {
   newAvatarForm.reset();
   clearValidation(newAvatarForm, validationConfig);
   openModalWindow(avatarPopup);
@@ -216,7 +213,7 @@ newAvatarForm.addEventListener("submit", (evt) => {
     avatar: newAvatarForm.elements.avatar.value,
   })
     .then((userData) => {
-      profileImage.src = userData.avatar;
+      profileImage.style.backgroundImage = `url('${userData.avatar}')`;
       newAvatarForm.reset();
       closeModalWindow(avatarPopup);
     })
@@ -290,8 +287,7 @@ Promise.all([getUserInfo(), getCardList()])
   .then(([userData, cards]) => {
     userId = userData._id;
 
-    profileImage.src = userData.avatar;
-    profileImage.alt = userData.name;
+    profileImage.style.backgroundImage = `url('${userData.avatar}')`;
     profileTitle.textContent = userData.name;
     profileDescription.textContent = userData.about;
 
